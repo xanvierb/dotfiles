@@ -1,0 +1,339 @@
+[color]
+turquoise = #1abc9c
+green-sea = #16a085
+emerald = #2ecc71
+nephritis = #27ae60
+peter-river = #3498db
+belize-hole = #2980b9
+amethyst = #9b59b6
+wisteria = #8e44ad
+wet-asphalt = #34495e
+midnight-blue = #2c3e50
+sun-flower = #f1c40f
+orange = #f39c12
+carrot = #e67e22
+pumpkin = #d35400
+alizarin = #e74c3c
+pomegranate = #c0392b
+clouds = #ecf0f1
+silver = #bdc3c7
+concrete = #95a5a6
+asbestos = #7f8c8d
+
+
+; Dark/Ligth
+; black
+black = ${xrdb:color0:#4c4a48}
+darkGrey = ${xrdb:color8:#767676}
+
+; red
+darkRed = ${xrdb:color1:#d13438}
+lightRed = ${xrdb:color9:#ff4343}
+
+; green
+darkGreen = ${xrdb:color2:#10893e}
+lightGreen = ${xrdb:color10:#00cc6a}
+
+; yellow
+darkYellow = ${xrdb:color3:#ff8c00}
+lightYellow = ${xrdb:color11:#ffb900}
+
+; blue
+darkBlue = ${xrdb:color4:#0063b1}
+lightBlue = ${xrdb:color12:#0078d7}
+
+; magenta
+darkMagenta = ${xrdb:color5:#9a0089}
+lightMagenta = ${xrdb:color13:#c239b3}
+
+; cyan
+darkCyan = ${xrdb:color6:#038387}
+lightCyan = ${xrdb:color14:#00b7c3}
+
+; white
+white = ${xrdb:color7:#ffffff}
+lightGrey = ${xrdb:color15:#e6e6e6}
+
+baseLow = #33ffffff
+baseMediumLow = #66ffffff
+baseMedium = #99ffffff
+baseMediumHigh = #ccffffff
+baseHigh = #ffffffff
+
+text = ${color.baseHigh}
+divider = ${color.baseMedium}
+
+customBackground = #cc000000
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[settings]
+screenchange-reload = false
+
+[bar/topI]
+monitor = eDP-1
+monitor-fallback = eDP-1-1
+monitor-strict = false
+
+fixed-center = true
+
+background = ${color.customBackground}
+foreground = ${color.text}
+line-size = 2
+height = 35
+
+font-0 = Segoe UI:size=14;2
+font-1 = Segoe UI:size=14:weight=bold;2
+font-2 = Inconsolata:size=14;2
+font-3 = Segoe UI Regular:size=14;2
+font-4 = Material Icons:size=14;4
+font-5 = Symbola:size=14;2
+font-6 = Twitter Color Emoji:size=14;2
+font-7 = FontAwesome:size=14;2
+
+module-margin = 2
+#modules-left = bspwm
+modules-left = i3
+modules-center = title
+modules-right = music coretemp weather redshift backlight battery volume openvpn date menu
+
+separator = |
+
+locale = en_GB.UTF-8
+
+enable-ipc = true
+
+#scroll-up = bspwm-desknext
+#scroll-down = bspwm-deskprev
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
+
+tray-position = right
+
+#wm-restack = bspwm
+wm-restack = i3
+
+[bar/topE]
+inherit = bar/topI
+monitor = HDMI-2
+monitor-fallback = HDMI-1
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[global/wm]
+margin-bottom = 0
+margin-top = 0
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[module/backlight]
+type = internal/xbacklight
+
+format = <ramp>
+
+ramp-0 = 🌑
+ramp-1 = 🌒
+ramp-2 = 🌓
+ramp-3 = 🌔
+ramp-4 = 🌕
+
+[module/battery]
+type = internal/battery
+
+full-at = 95
+battery = BAT0
+adapter = AC0
+
+poll-interval = 5
+
+format-charging = <animation-charging>
+format-discharging = <ramp-capacity>
+format-full = <label-full>
+
+label-full = 
+
+ramp-capacity-0 = 
+ramp.capacity-0-foreground = ${color.pomegranate}
+ramp-capacity-1 = 
+ramp-capacity-1-foreground = ${color.alizarin}
+ramp-capacity-2 = 
+ramp-capacity-2-foreground = ${color.pumpkin}
+ramp-capacity-3 = 
+ramp-capacity-3-foreground = ${color.carrot}
+ramp-capacity-4 = 
+ramp-capacity-4-foreground = ${color.orange}
+ramp-capacity-5 = 
+ramp-capacity-5-foreground = ${color.sun-flower}
+ramp-capacity-6 = 
+ramp-capacity-6-foreground = ${color.emerald}
+ramp-capacity-7 = 
+ramp-capacity-7-foreground = ${color.nephritis}
+
+animation-charging-0 = 
+animation-charging-1 = 
+
+animation-charging-framerate = 750
+
+[module/bspwm]
+type = internal/bspwm
+
+pin-workspaces = true
+
+label-focused-background = ${color.nephritis}
+label-focused-foreground = ${color.text}
+label-focused = "  %name%  "
+
+label-empty =
+
+label-occupied = "  %name%  "
+label-occupied-background = ${color.wet-asphalt}
+label-occupied-foreground = ${color.text}
+
+label-urgent = "  %name%  "
+label-urgent-background = ${color.nephritis}
+label-urgent-foreground = ${color.text}
+
+[module/music]
+type = custom/script
+interval = 1
+format-prefix = "🎵 "
+format = <label>
+exec = python ~/.config/polybar/spotify_status.py -f '{artist}: {song}'
+format-underline=#8e44ad
+
+[module/coretemp]
+type = custom/script
+exec = ~/.config/polybar/cputemp.sh
+interval = 60
+format-underline=f1c40f
+
+[module/date]
+type = internal/date
+interval = 1.0
+
+date =
+time = %H:%M
+date-alt = %A, %d %B %Y
+time-alt = %H:%M
+
+format =  <label>
+format-foreground = #fff
+
+label = %date% %time%
+label-font = 1
+label-foreground = ${color.text}
+
+[module/i3]
+type = internal/i3
+
+pin-workspaces = true
+
+strip-wsnumbers = true
+
+fuzzy-match = false
+
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;🎶
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+ws-icon-5 = 6;
+ws-icon-6 = 7;
+ws-icon-7 = 8;
+ws-icon-8 = 9;
+ws-icon-9 = 10;
+ws-icon-default = 
+
+label-visible = %icon%
+label-visible-padding = 2
+label-unfocused = %icon%
+label-unfocused-padding = 2
+
+;label-focused-foreground = ${color.text}
+label-focused-background = ${color.darkBlue}
+label-focused = %icon%
+;label-focused-underline = ${color.darkBlue}
+label-focused-padding = 2
+
+[module/menu]
+type = custom/menu
+
+label-open = 
+label-close = 
+label-separator = |
+
+label-open-padding-right = 2
+label-close-padding-right = 2
+
+menu-0-0 = 
+menu-0-0-exec = sudo systemctl reboot
+menu-0-0-padding = 2
+menu-0-1 = 
+menu-0-1-exec = sudo systemctl poweroff
+menu-0-1-padding = 2
+
+[module/openvpn]
+type = custom/script
+exec = pgrep openvpn
+interval = 5
+label = 
+
+[module/redshift]
+type = custom/script
+interval = 5
+
+exec = ~/.config/polybar/redshift.sh
+
+[module/title]
+type = internal/xwindow
+label-font = 2
+label-maxlen = 40
+
+[module/volume]
+type = internal/volume
+
+master-soundcard = default
+master-mixer = Master
+
+mapping = true
+
+format-volume = <ramp-volume>
+
+label-muted = 
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-headphones-0 = 
+
+[module/weather]
+type = custom/script
+interval = 900
+format = <label>
+format-prefix = " "
+exec = ~/.config/polybar/weather.py
+format-underline=2980b9
+
+[module/wireless-network]
+type = internal/network
+interface = wlp2s0
+
+interval = 3.0
+
+ping-interval = 3
+
+format-connected = <label-connected>
+format-disconnected = <label-disconnected>
+format-packetloss = <animation-packetloss>
+
+label-connected = 
+label-connected-foreground = ${color.nephritis}
+label-disonnected = 
+label-disconnected-foreground = ${color.pomegranate}
+
+animation-packetloss-0 = 
+animation-packetloss-0-foreground = ${color.orange}
+animation-packetloss-1 = 
+animation-packetloss-1-foreground = ${color.nephritis}
+animation-packetloss-framerate = 500
+
+; vim:ft=dosini
